@@ -1,0 +1,35 @@
+@import './shared/font';
+
+//PAGE
+@import './index';
+
+//COMPONENT
+@import './shared/header';
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html{
+  box-sizing: border-box;
+}
+
+html, body {
+  height:100%;
+  width:100%;
+  font-family: 'Montserrat', 'Helvetica';
+}
+
+.self-styled {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #fff;
+}
+
+.base-page{
+  color: #fff
+}
+
