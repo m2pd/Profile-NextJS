@@ -7,7 +7,7 @@ const Blog = () => {
     <BaseLayout>
       <div className="main-section">
         <BasePage>
-          <h1>Blog Page</h1>
+          <h1>Blog Page Edit</h1>
         </BasePage>
       </div>
     </BaseLayout>
