@@ -3,11 +3,11 @@ import { Container, Row, Col } from 'reactstrap';
 import BaseLayout from '../components/layouts/BaseLayout';
 import Typed from 'react-typed'
 
-export default function Home() {
+export default function Home(props) {
   const roles = ['Front-end Development', 'Tech Love', 'Team Player', 'ReactJS/Redux/NextJS', 'HTML/Pug', 'CSS/SCSS', 'Javascript/Typescript'];
 
   return (
-    <BaseLayout className="cover">
+    <BaseLayout className="cover" {...props.auth}>
       <div className="main-section">
         <div className="background-image">
           <img src="/static/images/background-index.png" />

@@ -2,9 +2,9 @@ import React from 'react'
 import BaseLayout from '../components/layouts/BaseLayout';
 import BasePage from '../components/layouts/BasePage';
 
-const Cv = () => {
+const CV = (props) => {
   return (
-    <BaseLayout>
+    <BaseLayout {...props.auth}>
       <div className="main-section">
         <BasePage className="cv-page">
           <h1>Cv Page</h1>
@@ -14,4 +14,4 @@ const Cv = () => {
   )
 }
 
-export default Cv
+export default CV

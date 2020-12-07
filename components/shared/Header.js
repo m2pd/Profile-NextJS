@@ -1,38 +1,15 @@
-import Link from 'next/link'
-
-// const Header = () => {
-//   return (
-//     <header>
-//       <Link href='/'>
-//         <a>Home </a>
-//       </Link>
-//       <Link href='/about'>
-//         <a>About </a>
-//       </Link>
-//       <Link href='/portfolio'>
-//         <a>Portfolio </a>
-//       </Link>
-//       <Link href='/blog'>
-//         <a>Blog </a>
-//       </Link>
-//       <Link href='/cv'>
-//         <a>CV </a>
-//       </Link>
-//     </header>
-//   )
-// }
-
-// export default Header
-
+import Link from 'next/link';
 import React, { useState } from 'react';
 import {
   Collapse,
   Nav, Navbar,
   NavbarBrand,
-  NavbarText, NavbarToggler,
-  NavItem,
-  NavLink
+  NavbarToggler,
+  NavItem
 } from 'reactstrap';
+import Cookies from 'js-cookie'
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 const BasicNavLink = (props) => {
   const { route, title } = props;
@@ -43,9 +20,43 @@ const BasicNavLink = (props) => {
   )
 }
 
-const Example = (props) => {
+const Login = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  return (
+    <span
+      className="nav-link port-navbar-link clickable"
+      onClick={() => loginWithRedirect()}
+    >
+      Login
+    </span>
+  )
+}
+
+const Logout = () => {
+  const { logout } = useAuth0();
+  const handleLogout = () => {
+    Cookies.remove('user')
+    Cookies.remove('jwt')
+    Cookies.remove('expiresAt')
+
+    logout({ returnTo: 'http://localhost:3000' })
+  }
+  return (
+    <span
+      className="nav-link port-navbar-link clickable"
+      onClick={() => handleLogout()}
+    >
+      Logout
+    </span>
+  )
+}
+
+const Header = (props) => {
+  const { isAuthenticated } = props;
   const [isOpen, setIsOpen] = useState(false);
 
+  // console.log('Header', isAuthenticated)
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -70,6 +81,16 @@ const Example = (props) => {
             <NavItem className="port-navbar-item">
               <BasicNavLink route="/cv" title="CV" />
             </NavItem>
+
+            {
+              isAuthenticated
+                ? <NavItem className="port-navbar-item">
+                  <Logout />
+                </NavItem>
+                : <NavItem className="port-navbar-item">
+                  <Login />
+                </NavItem>
+            }
           </Nav>
         </Collapse>
       </Navbar>
@@ -77,4 +98,4 @@ const Example = (props) => {
   );
 }
 
-export default Example;
+export default Header;
